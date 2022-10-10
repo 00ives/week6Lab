@@ -11,6 +11,6 @@ package database;
  */
 public class shoppingListDB {
     
-    ArrayList <>
+  
     
 }

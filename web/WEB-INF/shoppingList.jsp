@@ -17,18 +17,24 @@
 
         <div>
             Hello, ${username}
-
-            <a href="<c:url value='/ShoppingList'/>">Logout</a>
+<!--            <a href="login?logout" name="logout" value="logout"> Logout</a>
+            value='/cart?productCode=8601' -->
+            <a href="<c:url value='/ShoppingList?logout=logout'/>" >Logout</a>
         </div> 
 
         <h2>List</h2>
+        <form action="ShoppingList" method="post">
 
-        Add item: <input type="text" name="item"> <input type="button" value="Add">
+            Add item: <input type="text" name="userItemInput"> <input type="submit" value="Add">
+        </form>
 
         <ul>
+            <c:forEach items="${items}" var="item">
+
+            </c:forEach>
             <li>fasdf</li>
         </ul>
-        
+
         <input type="button" value="Delete">
     </body>
 </html>
