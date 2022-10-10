@@ -59,8 +59,8 @@ public class ShoppingListServlet extends HttpServlet {
 //        String userItemInput = "";
         ItemService shoppingList = null;
         ArrayList<Item> test = null;
-//        request.getAttribute(name)
-       
+//        String loopIndex = request.getParameter("groceryList");
+//        request.setAttribute("loopIndex", loopIndex);
         HttpSession session = request.getSession();
          try {
             test = shoppingList.getShoppingList();

@@ -29,36 +29,38 @@
         </form>
 
         <form action="ShoppingList" method="post">
-        <ul>
-            <li>${test.shoppingList}</li>
-            <li>${test.shoppingList[0]}</li>
-            <li>${test.shoppingList[1]}</li>
-            <li>${test.shoppingList[2]}</li>
-            <li>${test.shoppingList[2].getItem()}</li>
-            
-            <input type="radio" name="groceryList" value="${test.shoppingList[0]}">
-            <label>${test.shoppingList[0].getItem()}</label>
-            <br>
-            <input type="radio" name="groceryList" value="${test.shoppingList[1]}">
-            <label>${test.shoppingList[1].getItem()}</label>
-            <br>
-
-            <%--<c:forEach  var="item" items="${test.shoppingList}">--%>
-            <!--<li>${test.shoppingList}</li>-->
-            <!--<li>${item.shoppingList.getItem()}</li>-->
-            <!--<li>${item}</li>-->
-            <%--</c:forEach>--%>
+            <ul>
+                <li>${test.shoppingList}</li>
+                <li>${test.shoppingList[0]}</li>
+                <li>${test.shoppingList[2].getItem()}</li>
 
 
-            <h1> try 2 </h1>
-            <li>${shoppingList.shoppingList[1].getItem()}</li>
-                <c:forEach items="${shoppingList.shoppingList}" var="x">
-                <li>${x.getItem()}</li>
-            </c:forEach>
-        </ul>
+                <%--<c:forEach  var="item" items="${test.shoppingList}">--%>
+                <!--<li>${test.shoppingList}</li>-->
+                <!--<li>${item.shoppingList.getItem()}</li>-->
+                <!--<li>${item}</li>-->
+                <%--</c:forEach>--%>
 
+                <c:forEach items="${shoppingList.shoppingList}" var="x" varStatus="loop">
+                    <input type="radio" name="groceryList" value="${x.getItem()}">
+                    <label>${x.getItem()}</label>
+                    <br>
 
+                    </c:forEach>
+
+                <h1> try 2 </h1>
+                <!--<li>${shoppingList.shoppingList[1].getItem()}</li>-->
+                <!--this part works-->
+
+                <c:forEach items="${shoppingList.shoppingList}" var="x" >
+                    <li>${x.getItem()}</li>
+                    </c:forEach>
+
+                <!--do not delete above--> 
+            </ul>
+               
             <input type="button" value="Delete">
         </form>    
+                <!--<h1> the loop index is ${loopIndex}</h1>-->  
     </body>
 </html>
