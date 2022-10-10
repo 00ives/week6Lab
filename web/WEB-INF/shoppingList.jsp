@@ -17,8 +17,8 @@
 
         <div>
             Hello, ${username}
-<!--            <a href="login?logout" name="logout" value="logout"> Logout</a>
-            value='/cart?productCode=8601' -->
+            <!--            <a href="login?logout" name="logout" value="logout"> Logout</a>
+                        value='/cart?productCode=8601' -->
             <a href="<c:url value='/ShoppingList?logout=logout'/>" >Logout</a>
         </div> 
 
@@ -28,13 +28,37 @@
             Add item: <input type="text" name="userItemInput"> <input type="submit" value="Add">
         </form>
 
+        <form action="ShoppingList" method="post">
         <ul>
-            <c:forEach items="${items}" var="item">
+            <li>${test.shoppingList}</li>
+            <li>${test.shoppingList[0]}</li>
+            <li>${test.shoppingList[1]}</li>
+            <li>${test.shoppingList[2]}</li>
+            <li>${test.shoppingList[2].getItem()}</li>
+            
+            <input type="radio" name="groceryList" value="${test.shoppingList[0]}">
+            <label>${test.shoppingList[0].getItem()}</label>
+            <br>
+            <input type="radio" name="groceryList" value="${test.shoppingList[1]}">
+            <label>${test.shoppingList[1].getItem()}</label>
+            <br>
 
+            <%--<c:forEach  var="item" items="${test.shoppingList}">--%>
+            <!--<li>${test.shoppingList}</li>-->
+            <!--<li>${item.shoppingList.getItem()}</li>-->
+            <!--<li>${item}</li>-->
+            <%--</c:forEach>--%>
+
+
+            <h1> try 2 </h1>
+            <li>${shoppingList.shoppingList[1].getItem()}</li>
+                <c:forEach items="${shoppingList.shoppingList}" var="x">
+                <li>${x.getItem()}</li>
             </c:forEach>
-            <li>fasdf</li>
         </ul>
 
-        <input type="button" value="Delete">
+
+            <input type="button" value="Delete">
+        </form>    
     </body>
 </html>

@@ -20,6 +20,10 @@ public class ItemService {
         shoppingList = new ArrayList<>();
     }
 
+    public ArrayList<Item> getShoppingList() {
+        return shoppingList;
+    }
+
     public void addToShoppingList(Item item) {
         shoppingList.add(item);
     }

@@ -1,11 +1,13 @@
 package Servlets;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import models.Item;
 import services.ItemService;
@@ -53,11 +55,18 @@ public class ShoppingListServlet extends HttpServlet {
     }
 
     public void displayShoppingList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Item listItem = null;
-        String userItemInput = "";
+//        Item listItem = null;
+//        String userItemInput = "";
         ItemService shoppingList = null;
-
+        ArrayList<Item> test = null;
+//        request.getAttribute(name)
+       
         HttpSession session = request.getSession();
+         try {
+            test = shoppingList.getShoppingList();
+            
+        } catch (Exception e) {
+        }
         boolean newUser = (boolean) session.getAttribute("newUser");
 //        shoppingList = (ItemService) session.getAttribute("shoppinglist");
         if (newUser) {
@@ -68,24 +77,17 @@ public class ShoppingListServlet extends HttpServlet {
         } else {
             shoppingList = (ItemService) session.getAttribute("shoppingList");
         }
-
-        userItemInput = request.getParameter("userItemInput");
+        request.setAttribute("test", shoppingList);
+        request.setAttribute("shoppingList", shoppingList);
+        
+        String userItemInput = request.getParameter("userItemInput");
 
         if (userItemInput != null && !userItemInput.equals("")) {
-            listItem = new Item(userItemInput);
+            Item listItem = new Item(userItemInput);
             shoppingList.addToShoppingList(listItem);
+            
 
-//            String loggedIn = (String) session.getAttribute("loggedIn");
         }
-//        if (!newList && userItemInput != null && !userItemInput.equals("")) {
-//            listItem = new Item(userItemInput);
-//            shoppingList.addToShoppingList(listItem);
-//
-//        }
-
-//        if (!newList){
-//            ItemServices = new ItemServices(listItem);
-//        }
         getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
 
     }
