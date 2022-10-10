@@ -13,7 +13,7 @@ import models.Item;
  * @author ivorl
  */
 public class ItemService {
-    
+
     ArrayList<Item> shoppingList;
 
     public ItemService() {
@@ -27,8 +27,12 @@ public class ItemService {
     public void addToShoppingList(Item item) {
         shoppingList.add(item);
     }
-    
-    public void deleteFromShoppingList(Item item) {
-        shoppingList.remove(item);
+
+    public void deleteFromShoppingList(String index) {
+        for (int i = 0; i < shoppingList.size(); i++) {
+            if (Integer.parseInt(index) == i) {
+                shoppingList.remove(i);
+            }
+        }
     }
 }

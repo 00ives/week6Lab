@@ -59,8 +59,6 @@ public class ShoppingListServlet extends HttpServlet {
 //        String userItemInput = "";
         ItemService shoppingList = null;
         ArrayList<Item> test = null;
-//        String loopIndex = request.getParameter("groceryList");
-//        request.setAttribute("loopIndex", loopIndex);
         HttpSession session = request.getSession();
          try {
             test = shoppingList.getShoppingList();
@@ -85,9 +83,15 @@ public class ShoppingListServlet extends HttpServlet {
         if (userItemInput != null && !userItemInput.equals("")) {
             Item listItem = new Item(userItemInput);
             shoppingList.addToShoppingList(listItem);
-            
-
         }
+        
+        String loopIndex = request.getParameter("groceryList");
+        request.setAttribute("loopIndex", loopIndex);
+        
+        if (loopIndex !=null && !loopIndex.equals("")){
+            shoppingList.deleteFromShoppingList(loopIndex);
+        }
+        
         getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
 
     }

@@ -42,11 +42,11 @@
                 <%--</c:forEach>--%>
 
                 <c:forEach items="${shoppingList.shoppingList}" var="x" varStatus="loop">
-                    <input type="radio" name="groceryList" value="${x.getItem()}">
+                    <input type="radio" name="groceryList" value="${loop.index}" >
                     <label>${x.getItem()}</label>
                     <br>
 
-                    </c:forEach>
+                </c:forEach>
 
                 <h1> try 2 </h1>
                 <!--<li>${shoppingList.shoppingList[1].getItem()}</li>-->
@@ -58,9 +58,9 @@
 
                 <!--do not delete above--> 
             </ul>
-               
-            <input type="button" value="Delete">
+
+            <input type="submit" value="Delete">
         </form>    
-                <!--<h1> the loop index is ${loopIndex}</h1>-->  
+        <h1> the loop index is ${loopIndex}</h1>  
     </body>
 </html>
