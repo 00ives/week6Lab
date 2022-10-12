@@ -30,33 +30,15 @@
 
         <form action="ShoppingList" method="post">
             <ul>
-                <li>${test.shoppingList}</li>
-                <li>${test.shoppingList[0]}</li>
-                <li>${test.shoppingList[2].getItem()}</li>
 
+                <c:forEach items="${store.shoppingList}" var="x" varStatus="loop">
 
-                <%--<c:forEach  var="item" items="${test.shoppingList}">--%>
-                <!--<li>${test.shoppingList}</li>-->
-                <!--<li>${item.shoppingList.getItem()}</li>-->
-                <!--<li>${item}</li>-->
-                <%--</c:forEach>--%>
-
-                <c:forEach items="${shoppingList.shoppingList}" var="x" varStatus="loop">
                     <input type="radio" name="groceryList" value="${loop.index}" >
                     <label>${x.getItem()}</label>
                     <br>
 
                 </c:forEach>
 
-                <h1> try 2 </h1>
-                <!--<li>${shoppingList.shoppingList[1].getItem()}</li>-->
-                <!--this part works-->
-
-                <c:forEach items="${shoppingList.shoppingList}" var="x" >
-                    <li>${x.getItem()}</li>
-                    </c:forEach>
-
-                <!--do not delete above--> 
             </ul>
 
             <input type="submit" value="Delete">

@@ -25,73 +25,69 @@ public class ShoppingListServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String logout = request.getParameter("logout");
+        boolean newUser = true;
+        try {
+            
+        newUser = (boolean)session.getAttribute("newUser");
+        } catch (Exception e) {
+        }
+       
+
         if (username != null && !username.equals("")) {
-            boolean newUser = true;
+            newUser = true;
             boolean loggedIn = true;
             session.setAttribute("username", username);
             session.setAttribute("loggedIn", loggedIn);
             session.setAttribute("newUser", newUser);
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
             return;
-
         }
-        if (session.isNew()) {
+
+        if (newUser) {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-            return;
         } else if (logout != null) {
-//            newUser = true;
-//            session.setAttribute("newUser", true);
             session.invalidate();
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-            return;
         } else {
             boolean loggedIn = (boolean) session.getAttribute("loggedIn");
+            ItemService store = (ItemService)session.getAttribute("store");
             if (loggedIn) {
                 getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
-                return;
             }
         }
 
     }
 
     public void displayShoppingList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        Item listItem = null;
-//        String userItemInput = "";
-        ItemService shoppingList = null;
+        ItemService store = null;
         ArrayList<Item> test = null;
         HttpSession session = request.getSession();
-         try {
-            test = shoppingList.getShoppingList();
-            
-        } catch (Exception e) {
-        }
+
         boolean newUser = (boolean) session.getAttribute("newUser");
-//        shoppingList = (ItemService) session.getAttribute("shoppinglist");
+
         if (newUser) {
-            shoppingList = new ItemService();
-            session.setAttribute("shoppingList", shoppingList);
+            store = new ItemService();
+            session.setAttribute("store", store);
             newUser = false;
             session.setAttribute("newUser", newUser);
         } else {
-            shoppingList = (ItemService) session.getAttribute("shoppingList");
+            store = (ItemService) session.getAttribute("store");
         }
-        request.setAttribute("test", shoppingList);
-        request.setAttribute("shoppingList", shoppingList);
-        
+
         String userItemInput = request.getParameter("userItemInput");
 
         if (userItemInput != null && !userItemInput.equals("")) {
             Item listItem = new Item(userItemInput);
-            shoppingList.addToShoppingList(listItem);
+            store.addToShoppingList(listItem);
         }
-        
+
         String loopIndex = request.getParameter("groceryList");
         request.setAttribute("loopIndex", loopIndex);
-        
-        if (loopIndex !=null && !loopIndex.equals("")){
-            shoppingList.deleteFromShoppingList(loopIndex);
+
+        if (loopIndex != null && !loopIndex.equals("")) {
+            store.deleteFromShoppingList(loopIndex);
         }
-        
+
         getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
 
     }
